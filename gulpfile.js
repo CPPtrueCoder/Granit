@@ -1,3 +1,5 @@
+
+
 const {
     src,
     dest,
@@ -14,6 +16,8 @@ const cleanCSS = require('gulp-clean-css');
 const imageMin = require('gulp-imagemin');
 const notify = require('gulp-notify');
 const del = require('del');
+const gulp        = require('gulp');
+var reload      = browserSync.reload;
 
 function serverTask() {
     browserSync.init({
@@ -21,10 +25,12 @@ function serverTask() {
             baseDir: "./src"
         },
      
-        port: 3001,
+        port: 3000,
         open: true,
         notify: false
     });
+    gulp.watch("*.html").on("change", reload);
+
 }
 
 function sassTask() {
@@ -57,7 +63,7 @@ function watchTask() {
     watch('src/sass/**/*.sass', parallel(sassTask));
     watch('src/js/**/*.js', parallel(scriptsTask));
     watch('src/img/**/*', browserSync.reload);
-    watch('src/**/*.html', browserSync.reload);
+    watch("src/img/*.html").on("change", reload);
 }
 
 function scriptsTask() {
@@ -94,5 +100,4 @@ exports.watch = watchTask;
 exports.server = serverTask;
 
 
-exports.build = series(delTask, scriptsTask, sassTask, imagesTask, buildTask);
-exports.default = parallel(serverTask, watchTask);
+exports.default = series(delTask, scriptsTask, sassTask, imagesTask, buildTask);
