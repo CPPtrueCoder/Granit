@@ -1,0 +1,20 @@
+.intro {
+  height: 580px;
+  background: url("../img/layer1.png") no-repeat;
+  background-size: cover;
+}
+
+.contacts {
+  height: 600px;
+  background: url("../img/cart.png") no-repeat;
+  background-size: cover;
+}
+.contacts .box-contacts {
+  height: 350px;
+}
+
+footer {
+  background-color: #292929;
+}
+
+/*# sourceMappingURL=style.css.map */
